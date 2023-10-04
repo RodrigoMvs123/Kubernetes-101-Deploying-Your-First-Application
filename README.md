@@ -2,7 +2,7 @@
 
 https://www.youtube.com/watch?v=XltFOyGanYE 
 
-
+https://raw.githubusercontent.com/RodrigoMvs123/Kubernetes-101-Deploying-Your-First-Application/main/README.md
 
 
 
