@@ -4,7 +4,7 @@ https://www.youtube.com/watch?v=XltFOyGanYE
 
 https://raw.githubusercontent.com/RodrigoMvs123/Kubernetes-101-Deploying-Your-First-Application/main/README.md
 
-
+https://github.com/RodrigoMvs123/Kubernetes-101-Deploying-Your-First-Application/blame/main/README.md
 
 Getting started with Kubernetes
 Overview/Context
