@@ -1,4 +1,6 @@
-"# Kubernetes-101-Deploying-Your-First-Application" 
+
+
+## Kubernetes-101-Deploying-Your-First-Application" 
 
 https://www.youtube.com/watch?v=XltFOyGanYE 
 
@@ -6,6 +8,8 @@ https://raw.githubusercontent.com/RodrigoMvs123/Kubernetes-101-Deploying-Your-Fi
 
 https://github.com/RodrigoMvs123/Kubernetes-101-Deploying-Your-First-Application/blame/main/README.md
 
+## Steps
+```
 Getting started with Kubernetes
 Overview/Context
 Create simple application
@@ -17,19 +21,24 @@ Apply resources
 Add DNS records
 Validate
 Demo loading balance 
+```
 
-FastAPI
-https://fastapi.tiangolo.com/ 
+## FastAPI
+- https://fastapi.tiangolo.com/ 
 
-Visual Studio Code
-Terminal 
+### Visual Studio Code
+Terminal
+```bash
 python3 -m venv ./venv
 ls
 source ./venv/bin/activate 
 pip install fastapi
 pip freeze
 code requirements.txt 
+```
 
+## Source Code
+```txt
 Visual Studio Code
 EXPLORER 
 OPEN EDITORS
@@ -38,14 +47,24 @@ requirements.txt
 requirements.txt 
 fastapi~=0.79
 uvicorn~=0.18
+```
 
-Visual Studio Code
-Terminal 
+### Visual Studio Code
+Terminal
+```bash
 pip install -r requirements.txt
 mkdir app
 cd app
 touch __init__.py
 code main.py
+```
+
+## Source Code
+```python
+Visual Studio Code
+EXPLORER 
+OPEN EDITORS
+requirements.txt 
 
 main.py
 from fastapi import FastAPI
@@ -56,11 +75,16 @@ app = FastAPI()
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 uvicorn main:app --reload
+```
 
+## Source Code
+```txt
 Visual Studio Code
 EXPLORER 
 OPEN EDITORS
@@ -70,21 +94,30 @@ __init__.py
 main.py
 venv
 requirements.txt
+```
 
 localhost:8000
-
+```
 {
      “Hello”: “World”
 }
+```
 
 Container 
+
+
 FastAPI in Containers - Docker 
+
 https://fastapi.tiangolo.com/deployment/docker/?h=container 
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 code Dockerfile
+```
 
+## Source Code
+```dockerfile
 Visual Studio Code
 EXPLORER 
 OPEN EDITORS
@@ -93,9 +126,7 @@ __pycache__
 __init__.py
 main.py
 venv
-Dockefile
 requirements.txt
-
 
 Dockerfile
 FROM python:3.9
@@ -109,13 +140,18 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 COPY ./app /code/app
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 docker build .
 docker build -t k8s-fast-api
 docker run -p 8000:80 k8s-fast-api
+```
 
+## Source Code
+```python
 Visual Studio Code
 EXPLORER 
 OPEN EDITORS
@@ -138,17 +174,23 @@ app = FastAPI()
 @app.get("/")
 def read_root():
     return {"Hello": f"From: {os.environ.get('ENV', 'DEFAULT')}"}
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 docker build -t k8s-fast-api
 docker run -p 8000:80 k8s-fast-api
+```
 
 localhost:8000
-
+```
 {
      “Hello”: “From: DEFAULT_ENV”
 }
+```
+
+```
 
 Dockerhub
 Create Repository
@@ -156,25 +198,30 @@ k8s-getting-started
 Create
 Docker commands
 Docker push sidpalas/k8s-getting-started:tagname
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 docker build -t sidpalas/k8s-getting-started:0.0.1
 docker push sidpalas/k8s-getting-started:0.0.1
+```
 
 Dockerhub
 
 sidpalas/k8s-getting-started:tagname
-
+```
 Tags and Scans
 TAG                   OS
 0.0.1                  Linux ( Kernel )
+```
 
-Cluster 
+## Cluster 
 Civo Cloud
-https://www.civo.com/ 
+- https://www.civo.com/ 
 
 Create a new Kubernetes cluster
+```
 Name
 k8s-getting-started
 How many nodes
@@ -182,17 +229,23 @@ How many nodes
       5. Select size
 Small
 Create cluster
+```
 
+## Source Code
+```
 Visual Studio Code
 Terminal
 mkdir Kubernetes 
 cd Kubernetes
 ls
 code deployment.yaml
+```
 
-Kubernetes ( Deployment )
+## Kubernetes ( Deployment )
 https://kubernetes.io/docs/concepts/workloads/controllers/deployment/ 
 
+## Source Code
+```yaml
 Visual Studio Code
 EXPLORER 
 OPEN EDITORS
@@ -234,14 +287,21 @@ spec:
             memory: 300Mi
           limits:
             memory: 400Mi
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 code service.yaml
+```
 
-Kubernetes
+## Kubernetes
 Defining a Service 
+
 https://kubernetes.io/docs/concepts/services-networking/service/ 
+
+## Source Code
+```yaml
 
 Visual Studio Code
 EXPLORER 
@@ -269,12 +329,17 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+```
 
-Civo UI
+
+## Civo UI
 Cluster Information
 …
+
 Kubeconfig ( Download ) 
 
+## Source Code
+```kubeconfig
 Visual Studio Code
 EXPLORER 
 OPEN EDITORS
@@ -310,13 +375,14 @@ users:
   user: 
     client-certificate-data: ...
     client-key-data: ...
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal 
+```bash
 cd ..
 ls
 export KUBECONFIG=/Matheus\Desktop\Rodrigo\Visual Studio Code\Kubernetes\Kubernetes 101 Deploying Your First Application\Kubernetes/civo-kubeconfig
-
 kubectl get nodes
 cd Kubernetes
 kubectl apply -f .
@@ -325,13 +391,17 @@ kubectl get pods
 kubectl get pods -w
 …
 kubectl port-forward fast-api-6b55fb995f-tm8dt 8080:80
+```
 
 localhost:8080
-
+```
 {
      “Hello”: “From: DEFAULT_ENV”
 }
+```
 
+## Source Code
+```yaml
 Visual Studio Code
 EXPLORER 
 OPEN EDITORS
@@ -378,25 +448,33 @@ spec:
         env:
           - name: ENV
             value: "CIVO"
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 kubectl apply -f .
 kubectl get pods
 kubectl port-forward fast-api-587df9844c-b9vrk 8080:80
+```
 
 localhost:8080
-
+```
 {
      “Hello”: “From: CIVO”
 }
+```
 
 Kubernetes Ingress
+
 https://kubernetes.io/docs/concepts/services-networking/ingress/ 
 
 Traefik and Kubernetes
+
 https://doc.traefik.io/traefik/providers/kubernetes-ingress/ 
 
+## Source Code
+```yaml
 Visual Studio Code
 Terminal
 code ingress.yaml
@@ -441,12 +519,18 @@ spec:
                 name:  service1
                 port:
                   number: 80
+```
 
-Visual Studio Code
+
+### Visual Studio Code
 Terminal
+```bash
 kubectl get pods 
 k get namespaces
+```
 
+## Source Code
+```yaml
 Visual Studio Code
 EXPLORER 
 OPEN EDITORS
@@ -480,19 +564,25 @@ spec:
                 name:  fast-api
                 port:
                   number: 80
-      
-Visual Studio Code
+```
+
+### Visual Studio Code
 Terminal
+```bash
 kubectl apply -f .
 k get ingress
+```
 
-CIVO UI
-…
-external IP: https://212.2.24069:6443
+## CIVO UI
+external IP: 
+
+https://212.2.24069:6443
 
 Claudeflare UI
+
 https://www.cloudflare.com/ 
 
+``` 
 devopsdirective.com
 Active
 DNS
@@ -502,14 +592,17 @@ k8s
 IPV4 address ( required )
  212.2.24069
 Save
+```
 
 k8s devopsdirective.com
-
+```
 {
      “Hello”: “From: CIVO”
 }
+```
 
-
+## Source Code
+```python
 Visual Studio Code
 EXPLORER 
 OPEN EDITORS
@@ -537,13 +630,18 @@ app = FastAPI()
 @app.get("/")
 def read_root():
     return {"Hello": f"From: {os.environ.get('HOSTNAME', 'DEFAULT')}"}
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 cd ..
 docker build -t sidpalas/k8s-getting-started:0.0.2 .
 docker push -t sidpalas/k8s-getting-started:0.0.2 .
+```
 
+## Source Code
+```yaml
 Visual Studio Code
 EXPLORER 
 OPEN EDITORS
@@ -591,22 +689,28 @@ spec:
         env:
           - name: ENV
             value: "CIVO"
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 cd Kubernetes
 kubectl apply -f .
 kubectl get pods
 kubectl get pods fast-api-6576cbddd-74fpq -o yaml
+```
+
 
 k8s devopsdirective.com
-
+```
 {
      “Hello”: “From: DEFAULT_ENV”
 }
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 kubectl get pods
 kubectl exec -it fast-api-6576cbddd-74fpq - -bash
 echo $HOSTNAME
@@ -618,7 +722,10 @@ exit
 cd..
 docker build -t sidpalas/k8s-getting-started:0.0.3 .
 docker push -t sidpalas/k8s-getting-started:0.0.3 .
+```
 
+## Source Code
+```yaml
 Visual Studio Code
 EXPLORER 
 OPEN EDITORS
@@ -666,32 +773,36 @@ spec:
         env:
           - name: ENV
             value: "CIVO"
+```
 
-Visual Studio Code
+### Visual Studio Code
 Terminal
+```bash
 cd Kubernetes
 kubectl apply -f .
 kubectl get pods
+```
 
 k8s devopsdirective.com
-
+```
 {
      “Hello”: “From: fast-api-65d58c9b5-xf894”
 }
-
+```
 Refresh Page 
 
 k8s devopsdirective.com
-
+```
 {
      “Hello”: “From: fast-api-65d58c9b5-lpsjn”
 }
-
+```
 Refresh Page 
 
 k8s devopsdirective.com
-
+```
 {
      “Hello”: “From: fast-api-65d58c9b5-zpq9j”
 }
+```
 
